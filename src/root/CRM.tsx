@@ -16,7 +16,7 @@ import { ForgotPasswordPage, SetPasswordPage } from 'ra-supabase';
 import { Layout } from '../layout/Layout';
 import { i18nProvider } from './i18nProvider';
 import companies from '../companies';
-import contacts from '../contacts';
+import leads from '../leads';
 import { Dashboard } from '../dashboard/Dashboard';
 import deals from '../deals';
 import { LoginPage } from '../login/LoginPage';
@@ -43,7 +43,6 @@ import {
     defaultTitle,
 } from './defaultConfiguration';
 
-// Define the interface for the CRM component props
 export type CRMProps = {
     dataProvider?: DataProvider;
     authProvider?: AuthProvider;
@@ -74,46 +73,6 @@ const defaultLightTheme = deepmerge(defaultTheme, {
     },
 });
 
-/**
- * CRM Component
- *
- * This component sets up and renders the main CRM application using `react-admin`. It provides
- * default configurations and themes but allows for customization through props. The component
- * wraps the application with a `ConfigurationProvider` to provide configuration values via context.
- *
- * @param {Array<ContactGender>} contactGender - The gender options for contacts used in the application.
- * @param {string[]} companySectors - The list of company sectors used in the application.
- * @param {RaThemeOptions} darkTheme - The theme to use when the application is in dark mode.
- * @param {string[]} dealCategories - The categories of deals used in the application.
- * @param {string[]} dealPipelineStatuses - The statuses of deals in the pipeline used in the application.
- * @param {DealStage[]} dealStages - The stages of deals used in the application.
- * @param {RaThemeOptions} lightTheme - The theme to use when the application is in light mode.
- * @param {string} logo - The logo used in the CRM application.
- * @param {NoteStatus[]} noteStatuses - The statuses of notes used in the application.
- * @param {string[]} taskTypes - The types of tasks used in the application.
- * @param {string} title - The title of the CRM application.
- *
- * @returns {JSX.Element} The rendered CRM application.
- *
- * @example
- * // Basic usage of the CRM component
- * import { CRM } from './CRM';
- *
- * const App = () => (
- *     <CRM
- *         logo="/path/to/logo.png"
- *         title="My Custom CRM"
- *         lightTheme={{
- *             ...defaultTheme,
- *             palette: {
- *                 primary: { main: '#0000ff' },
- *             },
- *         }}
- *     />
- * );
- *
- * export default App;
- */
 export const CRM = ({
     contactGender = defaultContactGender,
     companySectors = defaultCompanySectors,
@@ -190,9 +149,9 @@ export const CRM = ({
                     />
                 </CustomRoutes>
                 <Resource name="deals" {...deals} />
-                <Resource name="contacts" {...contacts} />
+                <Resource name="leads" {...leads} />
                 <Resource name="companies" {...companies} />
-                <Resource name="contactNotes" />
+                <Resource name="leadNotes" />
                 <Resource name="dealNotes" />
                 <Resource name="tasks" list={ListGuesser} />
                 <Resource name="sales" {...sales} />

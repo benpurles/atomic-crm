@@ -66,7 +66,7 @@ export type Company = {
     tax_identifier: string;
     country: string;
     context_links?: string[];
-    nb_contacts?: number;
+    nb_leads?: number;
     nb_deals?: number;
 } & Pick<RaRecord, 'id'>;
 
@@ -80,7 +80,7 @@ export type PhoneNumberAndType = {
     type: 'Work' | 'Home' | 'Other';
 };
 
-export type Contact = {
+export type Lead = {
     first_name: string;
     last_name: string;
     title: string;
@@ -102,8 +102,8 @@ export type Contact = {
     company_name?: string;
 } & Pick<RaRecord, 'id'>;
 
-export type ContactNote = {
-    contact_id: Identifier;
+export type LeadNote = {
+    lead_id: Identifier;
     text: string;
     date: string;
     sales_id: Identifier;
@@ -114,7 +114,7 @@ export type ContactNote = {
 export type Deal = {
     name: string;
     company_id: Identifier;
-    contact_ids: Identifier[];
+    lead_ids: Identifier[];
     category: string;
     stage: string;
     description: string;
@@ -134,7 +134,7 @@ export type DealNote = {
     sales_id: Identifier;
     attachments?: AttachmentNote[];
 
-    // This is defined for compatibility with `ContactNote`
+    // This is defined for compatibility with `LeadNote`
     status?: undefined;
 } & Pick<RaRecord, 'id'>;
 
@@ -144,7 +144,7 @@ export type Tag = {
 } & Pick<RaRecord, 'id'>;
 
 export type Task = {
-    contact_id: Identifier;
+    lead_id: Identifier;
     type: string;
     text: string;
     due_date: string;
@@ -160,18 +160,18 @@ export type ActivityCompanyCreated = {
     date: string;
 };
 
-export type ActivityContactCreated = {
+export type ActivityLeadCreated = {
     type: typeof CONTACT_CREATED;
     company_id: Identifier;
     sales_id?: Identifier;
-    contact: Contact;
+    lead: Lead;
     date: string;
 };
 
-export type ActivityContactNoteCreated = {
+export type ActivityLeadNoteCreated = {
     type: typeof CONTACT_NOTE_CREATED;
     sales_id?: Identifier;
-    contactNote: ContactNote;
+    leadNote: LeadNote;
     date: string;
 };
 
@@ -193,8 +193,8 @@ export type ActivityDealNoteCreated = {
 export type Activity = RaRecord &
     (
         | ActivityCompanyCreated
-        | ActivityContactCreated
-        | ActivityContactNoteCreated
+        | ActivityLeadCreated
+        | ActivityLeadNoteCreated
         | ActivityDealCreated
         | ActivityDealNoteCreated
     );
